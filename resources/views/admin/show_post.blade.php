@@ -2,6 +2,9 @@
 <html>
   <head> 
    @include('admin.css')
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style type="text/css">
     .title_deg{
@@ -58,7 +61,8 @@
         <h1 class="title_deg">All Post</h1>
             <table class="table_deg table table-dark table-striped">
                 <tr class="th_des">
-                    <th> Post Title </th> <th> Description </th> <th> Post By</th> <th> Post Status</th> <th> User Type </th> <th>imeage</th> <th>Actions</th>
+                    <th> Post Title </th> <th> Description </th> <th> Post By</th> <th> Post Status</th> 
+                    <th> User Type </th> <th>imeage</th> <th>Actions</th> <th>Update</th> <th>Status Accept</th> <th>Status Reject</th>
                 </tr>
                 @foreach ($post as $post )
                     
@@ -72,6 +76,18 @@
                     <td><img class="img_deg" src="postimage/{{ $post->image }}"></td>
                     <td>
                         <a class="btn btn-danger" href="{{ url('delete_post', $post->id) }}" onclick="return confirm('Are you sure you want to delete this post ?')">Delete</a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-info" href="{{ url('edit_post', $post->id) }}">Edit</a>
+                    </td>
+
+                    <td>
+                        <a onclick="return confirm('are you sure you want to reject the post?')" class="btn btn-primary" href="{{ url('accept_post', $post->id) }}">Accept</a>
+                    </td>
+
+                    <td>
+                        <a onclick="return confirm('are you sure you want to reject the post?')" class="btn btn-danger" href="{{ url('reject_post', $post->id) }}">Reject</a>
                     </td>
                 </tr>
                 @endforeach
